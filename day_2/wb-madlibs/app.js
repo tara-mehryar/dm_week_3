@@ -58,15 +58,14 @@ app.get('/greet', (req, res) => {
 });
 
 app.get('/game', (req, res) => {
-  const userResponse = req.query.value;
-  if (userResponse === 'no'){
+  const userResponse = req.query.answer;
+  if (userResponse === 'No'){
     res.render('goodbye.html.njk')
-  } else (userResponse === 'yes'){
-    res.render('game.html.njk', {
-      name: person,
-      color: color,
-      noun: noun,
-      adjective: adjective
-    })
-  } 
-})
+  } else if(userResponse === 'Yes'){
+    res.render('game.html.njk')
+  }
+});
+
+app.get('/madlib', (req, res) => {
+  res.render('madlib.html.njk')
+});
