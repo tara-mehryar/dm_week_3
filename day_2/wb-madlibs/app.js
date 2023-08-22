@@ -1,6 +1,8 @@
+import sample from 'lodash.sample'; 
 import express from 'express';
 import morgan from 'morgan';
 import nunjucks from 'nunjucks';
+
 
 const app = express();
 const port = '8000';
@@ -48,5 +50,23 @@ app.get('/hello', (req, res) => {
 // Handle the form from /hello and greet the user.
 app.get('/greet', (req, res) => {
   const name = req.query.name || 'stranger';
-  res.render('greet.html.njk', { name: name });
+  const compliment = sample(COMPLIMENTS)
+  res.render('greet.html.njk', { 
+    name: name,
+    compliment: compliment
+  });
 });
+
+app.get('/game', (req, res) => {
+  const userResponse = req.query.value;
+  if (userResponse === 'no'){
+    res.render('goodbye.html.njk')
+  } else (userResponse === 'yes'){
+    res.render('game.html.njk', {
+      name: person,
+      color: color,
+      noun: noun,
+      adjective: adjective
+    })
+  } 
+})
